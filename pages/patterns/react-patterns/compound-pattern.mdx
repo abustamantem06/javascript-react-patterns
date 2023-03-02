@@ -131,27 +131,21 @@ export function FlyOut(props) {
   );
 }
 
-function Input(props) {
-  const { value, toggle } = React.useContext(FlyOutContext);
-
-  return <input onFocus={toggle} onBlur={toggle} value={value} {...props} />;
+function Input({ toggle, ...props }) {
+  return <input onFocus={toggle} onBlur={toggle} {...props} />;
 }
 
-function List({ children }) {
-  const { open } = React.useContext(FlyOutContext);
-
+function List({ open, children }) {
   return open && <ul>{children}</ul>;
 }
 
-function ListItem({ children, value }) {
-  const { setValue } = React.useContext(FlyOutContext);
-
+function ListItem({ children, value, setValue }) {
   return <li onMouseDown={() => setValue(value)}>{children}</li>;
 }
 
 FlyOut.Input = Input;
 FlyOut.List = List;
-FlyOut.ListItem = ListItem;
+FlyOut.Item = ListItem;
 ```
 
 All children components are cloned, and passed the value of `open`, `toggle`, `value` and `setValue`.
